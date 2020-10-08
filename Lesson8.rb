@@ -1,37 +1,20 @@
-# メソッド
-def say_hello
-    p "Hello World"
-end
+# 配列
+a = Array.new(3)
 
-say_hello
-say_hello
-say_hello
+a[0] = "sato"
+a[1] = "suzuki"
+a[2] = "takahashi"
 
-def say_hello(greeting)
-    p greeting
-end
+p a[0]
+p a[1]
+p a[2]
 
-say_hello("Good Morning")
-say_hello("Good Evening")
+b = ["hige","moge","hage"]
+b[3] = "hagehage"
+p b[3]
 
-def add(num01, num02)
-    return num01 + num02
-end
-
-add_result =  add(6,2)
-p add_result
-
-def cal_ave(num03,num04,num05)
-    return (num03 + num04 + num05) / 3
-end
-
-p cal_ave(9,4,2)
-
-def cal_ave2(nums)
-    s = 0
-    nums.each{|i| s += i}
-    return hoge = s / nums.length
-end
-
-result = cal_ave2([9,4,2])
-p result
+arr = [["nakanowatari","ken"],["oowada","akira"]]
+p arr[0][0]
+p arr[0][1]
+p arr[1][0]
+p arr[1][1]
