@@ -66,21 +66,80 @@ class Baz
 end
 
 # クラス変数のスコープ
-class Foo
+class Hoge
     @@a = :a
     class << Foo
         p @@a
     end
 
-    def Foo.a1
+    def Hoge.a1
         p @@a
     end
 end
 
-Foo.a1
+Hoge.a1
 # その場所を囲む最も内側のclass式またはmodule式のボディをスコープとして持つ
 
 # グローバル変数
 $foobar
 # プログラムのどこからでも参照可能
 
+# 定数
+# アルファベット大文字から始まる
+# 一度定義された定数に再び代入を行おうとするとエラー
+# 定義されていない定数にアクセスすると例外（NameError）
+# クラスの外で定義された定数はオブジェクトとなる
+class BB
+    FOO = 'FOO'
+end
+# クラス Foo の定数 FOO を定義(Foo::FOO)
+class CC < BB
+    BAR = 'BAR'
+    # 親クラスの定数は直接参照できる
+    p FOO
+
+    class Baz
+        # ネストしたクラスはクラスの継承関係上は無関係であるがネス
+        # トの外側の定数も直接参照できる
+        p BAR
+        p CC::FOO
+    end
+end
+
+# クラス・モジュールで定義された定数を外側から参照する
+# 為には::演算子
+module M 
+    I = 35
+    class C
+    end
+end
+p M::I
+p M::C
+p ::M
+
+M::NewConst = 888
+
+# 定数参照の優先順位
+# 親クラス・ネストの外側クラスで同名定数が定義されている
+# ネスト外側を先に参照
+# 親クラス側を参照したい時は::演算子
+class Hogehoge
+    CONST = 'OYA'
+end
+class Hobahoba
+    CONST = 'NEST'
+    p CONST
+    class Baba < Hogehoge
+       p  Hogehoge::CONST
+    end
+end
+
+class Hogehogehoge
+    CONST = 'OYA'
+end
+class Hobahobahoba < Hogehogehoge
+    p CONST
+    CONST = 'Bar'
+    p CONST
+    p Hogehogehoge::CONST
+end
