@@ -64,3 +64,4 @@ class Baz
     include Foo
     p @@AA +=1
 end
+
