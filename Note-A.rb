@@ -65,3 +65,18 @@ class Baz
     p @@AA +=1
 end
 
+# クラス変数のスコープ
+class Foo
+    @@a = :a
+    class << Foo
+        p @@a
+    end
+
+    def Foo.a1
+        p @@a
+    end
+end
+
+Foo.a1
+# その場所を囲む最も内側のclass式またはmodule式のボディをスコープとして持つ
+
